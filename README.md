@@ -16,4 +16,4 @@ I was looking for while still reducing an in some cases removing unnecessary man
 
 ## Usage
 
-
+Please see the apiproxySetup.groovy script for a sample setup. 
