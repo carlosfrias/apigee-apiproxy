@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="5" name="yahoo">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1445282966969</CreatedAt>
+    <CreatedBy>carlos.frias.01@gmail.com</CreatedBy>
+    <Description>Edge refresher</Description>
+    <DisplayName>yahoo</DisplayName>
+    <LastModifiedAt>1445285148911</LastModifiedAt>
+    <LastModifiedBy>carlos.frias.01@gmail.com</LastModifiedBy>
+    <Policies>
+        <Policy>Spike-Arrest-1</Policy>
+        <Policy>XML-to-JSON-1</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>

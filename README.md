@@ -15,5 +15,8 @@ During this process I ended up with a micro framework of scripts that give me th
 I was looking for while still reducing an in some cases removing unnecessary manual steps. 
 
 ## Usage
-
+The gradle shell plugin is used to make available any classpath dependencies. The apiproxySetup.groovy 
+script in the src/main/scripts folder can be consulted initially.
+ 
+ 
 
