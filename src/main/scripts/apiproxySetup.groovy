@@ -21,14 +21,5 @@ profile = new ApigeeProfile(
         revision: '1'
 )
 apigee = new Apigee(profile: profile)
-apiProxy = new ApiProxyService(apigee: apigee)
-
-downloadApiProxy = {
-    apiProxy.apiProxy.json.revision.each { revision ->
-        apiProxy.profile.revision = revision
-        apiProxy.exportApiProxy()
-        apiProxy.extractExportApiProxy()
-    }
-}
 
 println profile.application
