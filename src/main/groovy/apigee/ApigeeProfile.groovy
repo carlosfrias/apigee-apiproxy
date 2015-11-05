@@ -24,6 +24,8 @@ class ApigeeProfile {
     def overridedelay
     def apiProxySource
     def apiProxyEndpointProtocol = 'https'
+    def clientId
+    def clientSecret
 
     def getOrganizationURL() {
         assert hostURL, "Please provide the hostURL"

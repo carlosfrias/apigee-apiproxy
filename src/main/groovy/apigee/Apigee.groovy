@@ -17,13 +17,22 @@ class Apigee {
         assert profile, "Please provide an instance of ApigeeProfile"
         assert restClient, "Please provide an instance of RESTClient"
         profile.with {
-            assert username, "Please login"
-            assert password, "Please login"
-            restClient.authorization = new HTTPBasicAuthorization(
-                    username: username,
-                    password: password
-            )
             restClient.httpClient.sslTrustAllCerts = true
+            if (clientId && clientSecret) {
+                println "Authorization Header set with clientid and clientsecret"
+                restClient.authorization = new HTTPBasicAuthorization(
+                        username: clientId,
+                        password: clientSecret
+                )
+            } else {
+                assert username, "Please login"
+                assert password, "Please login"
+                println "Authorization Header set with username and password"
+                restClient.authorization = new HTTPBasicAuthorization(
+                        username: username,
+                        password: password
+                )
+            }
         }
         restClient
     }
