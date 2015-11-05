@@ -10,7 +10,7 @@ import wslite.rest.RESTClient
 class Apigee {
 
     ApigeeProfile profile
-    ApiProxyService apiProxy
+    ApiProxyService apiProxy = new ApiProxyService(apigee: this)
     TargetServersService targetServers
 
     def authorization(RESTClient restClient) {
@@ -18,21 +18,13 @@ class Apigee {
         assert restClient, "Please provide an instance of RESTClient"
         profile.with {
             restClient.httpClient.sslTrustAllCerts = true
-            if (clientId && clientSecret) {
-                println "Authorization Header set with clientid and clientsecret"
-                restClient.authorization = new HTTPBasicAuthorization(
-                        username: clientId,
-                        password: clientSecret
-                )
-            } else {
-                assert username, "Please login"
-                assert password, "Please login"
-                println "Authorization Header set with username and password"
-                restClient.authorization = new HTTPBasicAuthorization(
-                        username: username,
-                        password: password
-                )
-            }
+            assert username, "Please login"
+            assert password, "Please login"
+            println "Authorization Header set with username: $username and password: $password"
+            restClient.authorization = new HTTPBasicAuthorization(
+                    username: username,
+                    password: password
+            )
         }
         restClient
     }
@@ -44,16 +36,6 @@ class Apigee {
             profile = new ApigeeProfile()
         profile.username = username
         profile.password = password
-    }
-
-    def getApiProxy() {
-        if(!this.apiProxy) {
-            this.apiProxy = apiProxyService
-        }
-    }
-
-    def getApiProxyService() {
-        new ApiProxyService(apigee: this)
     }
 
     def getTargetServersService() {

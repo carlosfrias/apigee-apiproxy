@@ -211,20 +211,6 @@ class ApiProxyService {
         }
     }
 
-    def authorization(RESTClient restClient) {
-        apigee.profile.with {
-            assert username, "Please login"
-            assert password, "Please login"
-            restClient.authorization = new HTTPBasicAuthorization(
-                    username: apigee.profile.username,
-                    password: apigee.profile.password
-            )
-            restClient.httpClient.sslTrustAllCerts = true
-        }
-        restClient
-    }
-
-
     String getApiProxyZipFilePath() {
         assert apigee.profile?.buildDirectory, "Please provide the buildDirectory."
         assert apigee.profile?.baseDirectory, "Please provide the baseDirectory."

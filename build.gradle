@@ -52,10 +52,17 @@ dependencies {
 
 }
 
+ext {
+    username = "${apigee_username}"
+    password = "${apigee_password}"
+    clientid = "${apigee_org_clientid}"
+    clientsecret = "${apigee_org_clientsecret}"
+}
+
 test {
-    systemProperty 'username', apigee_username
-    systemProperty 'password', apigee_password
-    systemProperty 'clientId', apigee_org_clientid
+    systemProperty 'username', username
+    systemProperty 'password', password
+    systemProperty 'clientId', clientid
     systemProperty 'clientsecret', apigee_org_clientsecret
 }
 

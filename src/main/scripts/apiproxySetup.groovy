@@ -18,7 +18,9 @@ profile = new ApigeeProfile(
         buildDirectory: 'build',
         baseDirectory: System.properties.'user.dir',
         apiProxySource: 'src/main/apiproxy',
-        revision: '1'
+        revision: '1',
+        clientId: clientid,
+        clientSecret: clientsecret
 )
 apigee = new Apigee(profile: profile)
 

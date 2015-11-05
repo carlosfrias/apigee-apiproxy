@@ -19,12 +19,14 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
                 application: 'yahoo-deleteme',
                 apiVersion: 'v1',
                 projectVersion: '1.0.0-SNAPSHOT',
-                username: 'carlos.frias.01@gmail.com',
-                password: 'P1zr5pDxhzhu',
+                username: System.properties.username,
+                password: System.properties.password,
                 buildDirectory: 'build',
                 baseDirectory: System.properties.'user.dir',
                 revision: 1,
-                apiProxySource: 'src/main/apiproxy'
+                apiProxySource: 'src/main/apiproxy',
+//                clientId: System.properties.clientid,
+//                clientSecret: System.properties.clientsecret
         )
         apigee = new Apigee(profile: profile)
     }
@@ -32,7 +34,7 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
     def "require login credentials"() {
         given:
         def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
+        def apiProxy = apigee.apiProxy
         profile.with {
             username = null
             password = null
@@ -48,12 +50,10 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
 
     def "validate api proxy url"() {
         def profile = apigee.profile
-        def apiProxy = apigee.apiProxy
 
 
         given:
         profile
-        apiProxy
 
         when:
         def serviceURL = profile.apiProxyURL
@@ -67,12 +67,9 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
 
     def "validate apiproxy zip filename"() {
         def profile = apigee.profile
-        def apiProxy = apigee.apiProxy
-
 
         given:
         profile
-        apiProxy
 
         when:
         def name = profile.apiProxyZipFilename
@@ -84,7 +81,7 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
 
     def "create an apiproxy zip file"() {
         def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
+        def apiProxy = apigee.apiProxy
 
         given:
         profile.revision = '1'
@@ -114,15 +111,16 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
 
 
     def "Import an apiproxy zip file"() {
-        def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
-
+        def apiProxy = apigee.apiProxy
 
         given:
         apiProxy
 
         when:
         def result = apiProxy.importApiProxy()
+        println "result: ${result.dump()}"
+        println "result.request: ${result.request.dump()}"
+        println "result.response: ${result.response.dump()}"
 
         then:
         result
@@ -131,12 +129,9 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
     }
 
     def "list apiproxies in the organization"() {
-        def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
-
+        def apiProxy = apigee.apiProxy
 
         given:
-        profile
         apiProxy
 
         when:
@@ -149,12 +144,9 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
     }
 
     def "retrieve apiproxies on the server"() {
-        def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
-
+        def apiProxy = apigee.apiProxy
 
         given:
-        profile
         apiProxy
 
         when:
@@ -168,12 +160,9 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
 
 
     def "Get the latest revision on the server"() {
-        def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
-
+        def apiProxy = apigee.apiProxy
 
         given:
-        profile
         apiProxy
 
         when:
@@ -187,9 +176,7 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
     }
 
     def "Deploy the last api proxy revision"() {
-        def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
-
+        def apiProxy = apigee.apiProxy
 
         given:
         apiProxy
@@ -206,9 +193,7 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
 
 
     def "Undeploy the last api proxy revision"() {
-        def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
-
+        def apiProxy = apigee.apiProxy
 
         given:
         apiProxy
@@ -224,12 +209,9 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
     }
 
     def "Delete api proxy revision"() {
-        def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
-
+        def apiProxy = apigee.apiProxy
 
         given:
-        profile
         apiProxy
 
         when:
@@ -242,9 +224,7 @@ class ApigeeGatewayExecutionServiceSpec extends Specification {
     }
 
     def "Remove api proxy from server"() {
-        def profile = apigee.profile
-        def apiProxy = apigee.apiProxyService
-
+        def apiProxy = apigee.apiProxy
 
         given:
         apiProxy
