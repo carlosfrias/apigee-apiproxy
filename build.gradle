@@ -52,9 +52,22 @@ dependencies {
 
 }
 
+test {
+    systemProperty 'username', apigee_username
+    systemProperty 'password', apigee_password
+    systemProperty 'clientId', apigee_org_clientid
+    systemProperty 'clientsecret', apigee_org_clientsecret
+}
+
 groovysh {
     shell {
-        args = ['-e', ". src/main/scripts/apiproxySetup.groovy"]
+        args = [
+                '-e', "username=${apigee_username}",
+                '-e', "password=${apigee_password}",
+                '-e', "clientid=${apigee_org_clientid}",
+                '-e', "clientsecret=${apigee_org_clientsecret}",
+                '-e', ". src/main/scripts/apiproxySetup.groovy"
+        ]
     }
 }
 

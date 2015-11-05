@@ -19,6 +19,7 @@ class ApiProxyService {
     def getAppRestClient() {
         authorization(new RESTClient(apigee.profile.appServiceEndpointURL))
     }
+
     def getCreateApiProxy() {
         assert apigee.profile?.application, "Please provide the name of the application"
         try {
@@ -125,9 +126,17 @@ class ApiProxyService {
         }
     }
 
+    def getExportAllApiProxyRevisions() {
+        apiProxy.json.revision.each { revision ->
+            apigee.profile.revision = revision
+            exportApiProxy()
+            extractExportApiProxy()
+        }
+    }
+
     def getExtractExportApiProxy() {
         new AntBuilder().with {
-            def dir = 'src/main/apiproxy'
+            def dir = 'src/main/extractedApiproxy'
             def dest = "$dir/${apigee.profile.application}-${apigee.profile.projectVersion}-${apigee.profile.revision}"
             mkdir(dir: dir)
             unzip(

@@ -13,22 +13,13 @@ profile = new ApigeeProfile(
         application: 'yahoo-deleteme',
         apiVersion: 'v1',
         projectVersion: '1.0.0-SNAPSHOT',
-        username: 'carlos.frias.01@gmail.com',
-        password: 'P1zr5pDxhzhu',
+        username: username,
+        password: password,
         buildDirectory: 'build',
         baseDirectory: System.properties.'user.dir',
         apiProxySource: 'src/main/apiproxy',
         revision: '1'
 )
 apigee = new Apigee(profile: profile)
-apiProxy = new ApiProxyService(apigee: apigee)
-
-downloadApiProxy = {
-    apiProxy.apiProxy.json.revision.each { revision ->
-        apiProxy.profile.revision = revision
-        apiProxy.exportApiProxy()
-        apiProxy.extractExportApiProxy()
-    }
-}
 
 println profile.application

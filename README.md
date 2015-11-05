@@ -18,5 +18,3 @@ I was looking for while still reducing an in some cases removing unnecessary man
 The gradle shell plugin is used to make available any classpath dependencies. The apiproxySetup.groovy 
 script in the src/main/scripts folder can be consulted initially.
  
- 
-
