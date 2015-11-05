@@ -46,6 +46,12 @@ class Apigee {
         profile.password = password
     }
 
+    def getApiProxy() {
+        if(!this.apiProxy) {
+            this.apiProxy = apiProxyService
+        }
+    }
+
     def getApiProxyService() {
         new ApiProxyService(apigee: this)
     }
