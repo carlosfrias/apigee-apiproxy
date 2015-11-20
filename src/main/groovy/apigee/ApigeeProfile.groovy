@@ -17,6 +17,7 @@ class ApigeeProfile {
     def apiVersion
     def revision
     def orgName
+    def baasOrgName
     def username
     def password
     def options
@@ -26,12 +27,14 @@ class ApigeeProfile {
     def apiProxyEndpointProtocol = 'https'
     def clientId
     def clientSecret
+    def apiKey
+    def apiSecret
 
     def getOrganizationURL() {
         assert hostURL, "Please provide the hostURL"
         assert apiVersion, "Please provide the apiVersion"
         assert orgName, "Please provide the orgName"
-        "${hostURL}/${apiVersion}/organizations/${orgName}"
+        "${hostURL}/${apiVersion}/o/${orgName}"
     }
 
     def getOrganizationApiURI() {
@@ -97,6 +100,22 @@ class ApigeeProfile {
 
     def getRetrieveApiKeyEndpointURL() {
         "${hostURL}/v1/o/${orgName}/developers/${username}/apps/${application}"
+    }
+
+    def getKeystoreTruststoreURI() {
+        "/environments/${envName}/keystores"
+    }
+
+    def getKeystoreTruststoreURL() {
+        "${organizationURL}${keystoreTruststoreURI}"
+    }
+
+    def getTargetServerURI() {
+        "/environments/${envName}/targetservers"
+    }
+
+    def getTargetServerURL() {
+        "${organizationURL}${targetServerURI}"
     }
 
 }

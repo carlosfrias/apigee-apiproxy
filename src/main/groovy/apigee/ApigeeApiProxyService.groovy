@@ -1,6 +1,5 @@
 package apigee
 
-import wslite.http.auth.HTTPBasicAuthorization
 import wslite.rest.ContentType
 import wslite.rest.RESTClient
 import wslite.rest.RESTClientException
@@ -8,7 +7,7 @@ import wslite.rest.RESTClientException
 /**
  * Created by carlosfrias on 10/19/15.
  */
-class ApiProxyService {
+class ApigeeApiProxyService {
 
     Apigee apigee
 
@@ -129,15 +128,15 @@ class ApiProxyService {
     def getExportAllApiProxyRevisions() {
         apiProxy.json.revision.each { revision ->
             apigee.profile.revision = revision
-            exportApiProxy()
-            extractExportApiProxy()
+            exportApiProxy
+            extractExportApiProxy
         }
     }
 
     def getExtractExportApiProxy() {
+        def dir = 'src/main/extractedApiproxy'
+        def dest = "$dir/${apigee.profile.application}-${apigee.profile.projectVersion}-${apigee.profile.revision}"
         new AntBuilder().with {
-            def dir = 'src/main/extractedApiproxy'
-            def dest = "$dir/${apigee.profile.application}-${apigee.profile.projectVersion}-${apigee.profile.revision}"
             mkdir(dir: dir)
             unzip(
                     src: apiProxyZipFilePath,
@@ -263,9 +262,5 @@ class ApiProxyService {
             responses.deployApiProxy = resp
         }
         println "Completed redeploy for api proxy: ${apigee.profile.application}"
-    }
-
-    def getApiKeys() {
-
     }
 }

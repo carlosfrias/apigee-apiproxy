@@ -1,20 +1,24 @@
-# Apigee API Proxy Management Scripts
+Lazybones template project
+--------------------------
 
-##Overview
+You have just created a simple project for managing your own Lazybones project
+templates. You get a build file (`build.gradle`) and a directory for putting
+your templates in (`templates`).
 
-This is a set of groovy scripts that help manage the development cycle I found when working with 
-the Apigee Edge server in the cloud. I found that the emphasis on using curl from bash was good but 
-it also introduces more manual interaction then is really required. The maven plugin does a good 
-job of managing deployments but I did not find the fine grain control that helped me understand how 
-to work with Edge. I found myself writing scripts to reduce the unnecessary manual interactions and 
-to gain greater control over the development cycle. I wanted the flexibility of working with a shell 
-and the opportunity to automate interactions beyond what I received from working with browser 
-extensions. I chose to use groovy and the groovy shell as an extension to my development environment. 
+To get started, simply create new directories under the `templates` directory
+and put the source of the different project templates into them. You can then
+package and install the templates locally with the command:
 
-During this process I ended up with a micro framework of scripts that give me the level of control 
-I was looking for while still reducing an in some cases removing unnecessary manual steps. 
+    ./gradlew installAllTemplates
 
-## Usage
-The gradle shell plugin is used to make available any classpath dependencies. The apiproxySetup.groovy 
-script in the src/main/scripts folder can be consulted initially.
- 
+You'll then be able to use Lazybones to create new projects from these templates.
+If you then want to distribute them, you will need to set up a Bintray account,
+populate the `repositoryUrl`, `repositoryUsername` and `repositoryApiKey` settings
+in `build.gradle`, add new Bintray packages in the repository via the Bintray
+UI, and finally publish the templates with
+
+    ./gradlew publishAllTemplates
+
+You can find out more about creating templates on [the GitHub wiki][1].
+
+[1]: https://github.com/pledbrook/lazybones/wiki/Template-developers-guide

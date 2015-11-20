@@ -1,8 +1,7 @@
-
 plugins {
     id 'groovy'
     id 'maven'
-    id 'idea'
+    id 'signing'
     id "com.github.tkruse.groovysh" version "1.0.8"
 }
 
@@ -52,27 +51,18 @@ dependencies {
 
 }
 
-ext {
-    username = "${apigee_username}"
-    password = "${apigee_password}"
-    clientid = "${apigee_org_clientid}"
-    clientsecret = "${apigee_org_clientsecret}"
-}
-
 test {
-    systemProperty 'username', username
-    systemProperty 'password', password
-    systemProperty 'clientId', clientid
-    systemProperty 'clientsecret', apigee_org_clientsecret
+    systemProperty 'username', proxyUsername
+    systemProperty 'password', proxyPassword
+    systemProperty 'apikey', proxyApiKey
+    systemProperty 'apisecret', proxyApiSecret
 }
 
 groovysh {
     shell {
         args = [
-                '-e', "username=${apigee_username}",
-                '-e', "password=${apigee_password}",
-                '-e', "clientid=${apigee_org_clientid}",
-                '-e', "clientsecret=${apigee_org_clientsecret}",
+                '-e', "username='${proxyUsername}'",
+                '-e', "password='${proxyPassword}'",
                 '-e', ". src/main/scripts/apiproxySetup.groovy"
         ]
     }
