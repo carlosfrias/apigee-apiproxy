@@ -15,6 +15,10 @@ class ApigeeApiProxyService {
         apigee.authorization(new RESTClient(apigee.profile.organizationURL))
     }
 
+    def getRestClient(token) {
+        apigee.authorization(token, new RESTClient(apigee.profile.organizationURL))
+    }
+
     def getAppRestClient() {
         authorization(new RESTClient(apigee.profile.appServiceEndpointURL))
     }

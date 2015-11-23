@@ -1,5 +1,6 @@
 package apigee
 
+import apigee.security.BearerTokenAuthorization
 import wslite.http.auth.HTTPBasicAuthorization
 import wslite.rest.ContentType
 import wslite.rest.RESTClient
@@ -24,6 +25,19 @@ class Apigee {
         restClient.authorization = new HTTPBasicAuthorization(
                 username: profile.username,
                 password: profile.password
+        )
+        restClient
+    }
+
+    def authorization(bearerToken, RESTClient restClient) {
+        assert profile, "Please provide an instance of ApigeeProfile"
+        assert restClient, "Please provide an instance of RESTClient"
+        restClient.httpClient.sslTrustAllCerts = true
+        assert profile?.username, "Please login"
+        assert profile?.password, "Please login"
+        println "Authorization Header set with username: $profile.username and password: $profile.password"
+        restClient.authorization = new BearerTokenAuthorization(
+                token: bearerToken
         )
         restClient
     }
